@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     
     var currentInput: Double {
         get {
-            return Double(label.text!)!
+            return Double(label.text ?? "0") ?? 0
         }
         set {
             let value = "\(newValue)"
@@ -37,7 +37,7 @@ class ViewController: UIViewController {
         let number = sender.titleLabel!.text!
         
         if stillTyping {
-            label.text = label.text! + number
+            label.text = (label.text ?? "0") + number
         } else {
             label.text = number
             stillTyping = true
@@ -89,7 +89,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func actionOperands(_ sender: UIButton) {
-        operationSing = sender.titleLabel!.text!
+        operationSing = sender.titleLabel?.text ?? "0"
         firstOperand = currentInput
         stillTyping = false
         dotIsPlaced = false
@@ -101,7 +101,7 @@ class ViewController: UIViewController {
     
     @IBAction func actionDot(_ sender: UIButton) {
         if stillTyping && !dotIsPlaced {
-            label.text = label.text!  + "."
+            label.text = (label.text ?? "0") + "."
             dotIsPlaced = true
         }
     }
